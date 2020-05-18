@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('v1')->group(function () {
+    Route::get('auth/google', 'Api\Auth\GoogleController@show')->name('google.login');
+    Route::get('auth/google/callback', 'Api\Auth\GoogleController@store');
+    Route::group(['middleware' => 'auth:api'], function () {
+    });
 });
