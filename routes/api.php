@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('v1')->group(function () {
     Route::get('auth/google', 'Api\Auth\GoogleController@show')->name('google.login');
     Route::get('auth/google/callback', 'Api\Auth\GoogleController@store');
-    Route::post('auth/access', 'Api\Auth\AccessController@store');
+    Route::post('login', 'Api\Auth\AccessController@store');
     Route::group(['middleware' => 'auth:api'], function () {
-
+        Route::get('users', 'Api\UsersController@index');
     });
 });
